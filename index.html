@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SISPROTO - Sistema Municipal de Protocolos e Serviços (v1.4 - 2004)</title>
+  <!-- Folha de estilos CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra Superior Governamental -->
+  <div class="gov-bar">
+    <span>BRASIL - GOVERNO MUNICIPAL DE SÃO PAULO DO SUL</span>
+    <span>ACESSIBILIDADE | ALTO CONTRASTE | MAPA DO SITE</span>
+  </div>
+
+  <!-- Cabeçalho Principal -->
+  <header class="main-header">
+    <div class="logo-area">
+      <div class="brasao">[BRASÃO]</div>
+      <div class="header-titles">
+        <h1>SISPROTO - Portal do Cidadão</h1>
+        <p>Sistema Integrado de Protocolo e Serviços Municipais - Versão 2004.2</p>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#servicos">Carta de Serviços</a></li>
+        <li><a href="#consulta">Consultar Protocolo</a></li>
+        <li><a href="#licitacoes">Diário e Editais</a></li>
+        <li><a href="#atendimento">Fale com o Prefeito</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Letreiro de Avisos (Clássico de sites antigos!) -->
+  <div class="alert-banner" id="alertBanner">
+    <p>⚠️ <strong>ATENÇÃO CONTRIBUINTE:</strong> O sistema ficará fora do ar neste domingo das 00h às 23h59 para manutenção nos servidores COBOL. Emita sua guia de IPTU com antecedência! <button id="closeBanner" class="btn-small">[X] Fechar</button></p>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <main class="container">
+
+    <!-- Seção 1: Serviços Rápidos (Para treinar CSS Grid, SASS e Animações/Hover) -->
+    <section id="servicos" class="section-box">
+      <div class="section-header">
+        <h2>Serviços Mais Acessados pelo Cidadão</h2>
+        <p>Clique em um card para selecionar o serviço desejado ou abrir a solicitação.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card" data-service="IPTU 2026">
+          <div class="card-icon">🏠</div>
+          <h3>2ª Via de IPTU</h3>
+          <p>Emissão de carnes, certidão negativa de débitos imobiliários e recálculo de multas.</p>
+          <span class="status-badge">Disponível</span>
+          <button class="btn-action">Acessar Serviço</button>
+        </div>
+
+        <div class="service-card" data-service="Nota Fiscal Eletrônica">
+          <div class="card-icon">📄</div>
+          <h3>Nota Fiscal (ISS)</h3>
+          <p>Emissão de Nota Fiscal de Serviços Avulsa e declaração mensal para autônomos.</p>
+          <span class="status-badge">Lentidão</span>
+          <button class="btn-action">Acessar Serviço</button>
+        </div>
+
+        <div class="service-card" data-service="Alvará de Funcionamento">
+          <div class="card-icon">🏢</div>
+          <h3>Alvará Digital</h3>
+          <p>Abertura de empresas, renovação de licença sanitária e consulta de viabilidade.</p>
+          <span class="status-badge">Disponível</span>
+          <button class="btn-action">Acessar Serviço</button>
+        </div>
+
+        <div class="service-card" data-service="Poda de Árvore e Zeladoria">
+          <div class="card-icon">🌳</div>
+          <h3>Tapa-Buraco e Poda</h3>
+          <p>Solicitação de manutenção de vias públicas, iluminação queimada e poda de árvores.</p>
+          <span class="status-badge">Disponível</span>
+          <button class="btn-action">Acessar Serviço</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção 2: Consulta de Protocolo e Últimos Editais -->
+    <div class="two-columns">
+      <section id="consulta" class="section-box">
+        <h2>Consultar Andamento de Processo</h2>
+        <p>Digite o número do processo físico ou eletrônico (Ex: 2026.000123-9):</p>
+        <form id="protocolForm" class="legacy-form">
+          <div class="form-group">
+            <label for="numProtocolo">Nº do Protocolo *:</label>
+            <input type="text" id="numProtocolo" placeholder="0000.000000-0" required>
+          </div>
+          <div class="form-group">
+            <label for="cpfCnpj">CPF ou CNPJ do Requerente *:</label>
+            <input type="text" id="cpfCnpj" placeholder="000.000.000-00" required>
+          </div>
+          <div class="form-group">
+            <label for="exercicio">Ano de Exercício:</label>
+            <select id="exercicio">
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="anteriores">1998 a 2023 (Arquivo Morto)</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="primary-button">Pesquisar Processo</button>
+            <button type="reset" class="secondary-button">Limpar Campos</button>
+          </div>
+        </form>
+        <div id="resultadoBusca" class="search-result" style="display: none;"></div>
+      </section>
+
+      <!-- Seção 3: Abertura de Chamado / Ouvidoria -->
+      <section id="atendimento" class="section-box">
+        <h2>Abertura Rápida de Ouvidoria</h2>
+        <p>Tem alguma reclamação, sugestão ou denúncia? Envie diretamente ao setor responsável.</p>
+        <form id="ouvidoriaForm" class="legacy-form">
+          <div class="form-group">
+            <label for="nomeCidadao">Nome Completo:</label>
+            <input type="text" id="nomeCidadao" name="nomeCidadao" required>
+          </div>
+          <div class="form-group">
+            <label for="emailCidadao">E-mail para Retorno:</label>
+            <input type="email" id="emailCidadao" name="emailCidadao" required>
+          </div>
+          <div class="form-group">
+            <label for="assunto">Serviço Relacionado:</label>
+            <input type="text" id="assunto" name="assunto" placeholder="Clique em um card acima ou digite aqui">
+          </div>
+          <button type="submit" class="primary-button">Registrar Manifestação</button>
+        </form>
+      </section>
+    </div>
+
+    <!-- Seção 4: Quadro de Avisos e Editais Recentes -->
+    <section id="licitacoes" class="section-box">
+      <h2>Últimas Publicações no Diário Oficial</h2>
+      <table class="legacy-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Nº do Ato</th>
+            <th>Secretaria</th>
+            <th>Assunto / Objeto</th>
+            <th>Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>22/10/2026</td>
+            <td>Edital 045/2026</td>
+            <td>Sec. de Educação</td>
+            <td>Aquisição de computadores para laboratórios de informática.</td>
+            <td>Aberto</td>
+          </tr>
+          <tr>
+            <td>20/10/2026</td>
+            <td>Portaria 882/2026</td>
+            <td>Recursos Humanos</td>
+            <td>Convocação de estagiários aprovados em Desenvolvimento de Sistemas.</td>
+            <td>Publicado</td>
+          </tr>
+          <tr>
+            <td>15/10/2026</td>
+            <td>Decreto 102/2026</td>
+            <td>Gabinete</td>
+            <td>Institui a modernização e acessibilidade dos portais web municipais.</td>
+            <td>Urgente</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="main-footer">
+    <p>© 2004-2026 Prefeitura Municipal de São Paulo do Sul - Departamento de Processamento de Dados (CPD)</p>
+    <p class="footer-note">Melhor visualizado no Internet Explorer 6.0 em resolução 800x600 pixels.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
